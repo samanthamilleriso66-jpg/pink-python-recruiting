@@ -1,5 +1,5 @@
-// Paste the deployed Google Apps Script Web App URL here once deployed.
-const INTAKE_ENDPOINT = '';
+// Pink Python Recruiting intake endpoint
+const INTAKE_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwIqH4VwRBc4h4XaXwFQrUg1nuGPU-xMwnALwOxPdi-u7YkCPJBbHlGzAM1EIyMX_E2HA/exec';
 const PINK_PYTHON_EMAIL='samanthamilleriso66@gmail.com';
 
 function openGmail(subject, body){
@@ -15,7 +15,7 @@ async function sendIntake(data, subject, body){
   }
 
   try {
-    const response = await fetch(INTAKE_ENDPOINT, {
+    await fetch(INTAKE_ENDPOINT, {
       method:'POST',
       headers:{'Content-Type':'text/plain;charset=utf-8'},
       body:JSON.stringify(data),
@@ -45,7 +45,7 @@ employerForm.addEventListener('submit',async e=>{
  setSubmitting(button,'Sending...');
  await sendIntake({type:'employer',...v,employmentType:v.type},`Employer Intake — ${v.company} — ${v.role}`,body);
  resetButton(button);
- alert(INTAKE_ENDPOINT ? 'Recruiting request received. Pink Python has been notified.' : 'Your request is ready in Gmail. Please review it and click Send.');
+ alert('Recruiting request received. Pink Python has been notified.');
 });
 
 const candidateForm=document.getElementById('candidateForm');
@@ -55,5 +55,5 @@ candidateForm.addEventListener('submit',async e=>{
  setSubmitting(button,'Sending...');
  await sendIntake({type:'candidate',...v},`Candidate Intake — ${v.name} — ${v.role}`,body);
  resetButton(button);
- alert(INTAKE_ENDPOINT ? 'Candidate profile received. Pink Python has been notified.' : 'Your profile is ready in Gmail. Please review it and click Send.');
+ alert('Candidate profile received. Pink Python has been notified.');
 });
